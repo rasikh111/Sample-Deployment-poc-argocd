@@ -1,9 +1,10 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: nginx-deployment
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     matchLabels:
       app: nginx
@@ -12,24 +13,11 @@ spec:
       labels:
         app: nginx
     spec:
-      volumes:
-      - name: html-volume
-        emptyDir: {}
-      initContainers:
-      - name: init-html
-        image: busybox
-        command: ["sh", "-c", "echo 'Hello Rasikh' > /usr/share/nginx/html/index.html"]
-        volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
       containers:
       - name: nginx
-        image: nginx:1.14.2
+        image: rasikh11/web-nginx:v3
         ports:
         - containerPort: 80
-        volumeMounts:
-        - name: html-volume
-          mountPath: /usr/share/nginx/html
 ---
 apiVersion: v1
 kind: Service
