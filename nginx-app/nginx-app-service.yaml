@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: nginx
-        image: rasikh11/web-nginx:v3
+        image: linuxserver/nginx:1.28.0
         ports:
         - containerPort: 80
 ---
